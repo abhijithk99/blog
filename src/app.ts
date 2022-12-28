@@ -4,18 +4,27 @@ import bodyParser from "body-parser";
 const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config();
+const cors = require("cors");
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 app.use("/blog", require("./controllers/blog.controller"));
 
-app.listen(process.env.PORT, () => {
-  console.log(`listening to port 3000....${process.env.PORT}`);
+app.listen(3002, () => {
+  console.log(`listening to port 3001....`);
 });
 
-mongoose.set("strictQuery", false);
 mongoose.connect(
   "mongodb+srv://interns:interns123@cluster0.3th3cwn.mongodb.net/blog",
   //process.env.DB_CONNECTION,                    // ERR : env showing error

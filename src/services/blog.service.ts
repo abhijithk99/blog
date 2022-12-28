@@ -1,11 +1,11 @@
 const { Blog } = require("../models/blog.model");
 
 type Blog = {
-  title: String;
-  author: String;
+  title: any;
+  author: any;
   authorImage: Buffer;
   datePosted: Date;
-  content: String;
+  content: any;
 };
 
 const newBlog = async ({
